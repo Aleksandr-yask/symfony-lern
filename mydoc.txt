@@ -1,0 +1,16 @@
+symfony server:start -d - запуск сервера
+symfony server:log - логи php
+symfony logs
+
+symfony composer req maker --dev - генератор контроллеров
+    symfony console list make - список доступных
+
+    symfony console make:entity Conference - пример
+    symfony console make:entity Comment - пример
+
+инструменты:
+symfony composer req logger - логер
+symfony composer req debug --dev - отладка в окражении разработчика
+symfony composer req orm - Doctrine orm
+
+symfony composer req annotations - анотации
