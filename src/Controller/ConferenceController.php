@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Conference;
+use App\Form\CommentFormType;
 use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +18,7 @@ use Twig\Error\SyntaxError;
 
 class ConferenceController extends AbstractController
 {
-    private $twig;
+    private Environment $twig;
     public function __construct(Environment $twig)
     {
         $this->twig = $twig;
@@ -31,19 +33,18 @@ class ConferenceController extends AbstractController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function index(ConferenceRepository $conferenceRepository)
+    public function index()
     {
-        return new Response($this->twig->render('conference/index.html.twig', [
-            'conferences' => $conferenceRepository->findAll()
-        ]));
+        return new Response($this->twig->render('conference/index.html.twig'));
     }
 
     /**
-     * @Route("/conference/{id}", name="conference")
+     * @Route("/conference/{slug}", name="conference")
      *
      * @param Request $request
      * @param Conference $conference
      * @param CommentRepository $commentRepository
+     * @param ConferenceRepository $conferenceRepository
      * @return Response
      * @throws LoaderError
      * @throws RuntimeError
@@ -52,6 +53,9 @@ class ConferenceController extends AbstractController
     public function show(Request $request, Conference $conference,
                          CommentRepository $commentRepository)
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentFormType::class, $comment);
+
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $commentRepository->getCommentPagination($conference, $offset);
 
@@ -59,7 +63,8 @@ class ConferenceController extends AbstractController
             'conference' => $conference,
             'comments' => $paginator,
             'previous' => $offset - CommentRepository::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE)
+            'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
+            'comment_form' => $form->createView()
         ]));
     }
 }
