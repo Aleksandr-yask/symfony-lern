@@ -13,4 +13,15 @@ symfony composer req logger - логер
 symfony composer req debug --dev - отладка в окражении разработчика
 symfony composer req orm - Doctrine orm
 
+symfony composer req admin - EasyAdmin админ панель (стр 94)
+symfony composer req twig - много возможностей (экранирование, наследование шаблонов) (101)
+
+
 symfony composer req annotations - анотации
+
+docker
+docker-compose up -d - запуск
+docker-compose stop - стоп
+
+symfony console make:migration - миграции
+symfony console doctrine:migrations:migrate
