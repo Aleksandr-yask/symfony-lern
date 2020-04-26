@@ -44,7 +44,7 @@ class Conference
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private ?string $slug;
+    private $slug;
 
     public function __construct()
     {
@@ -143,7 +143,7 @@ class Conference
 
     public function computeSlug(SluggerInterface $slugger)
     {
-        if ($this->slug || '-' === $this->slug) {
+        if (!$this->slug || '-' === $this->slug) {
             $this->slug = (string) $slugger->slug((string) $this)->lower();
         }
     }

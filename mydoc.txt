@@ -1,6 +1,7 @@
 symfony server:start -d - запуск сервера
 symfony server:log - логи php
 symfony logs
+symfony console debug:router - все пути приложения
 
 symfony composer req maker --dev - генератор контроллеров
     symfony console list make - список доступных
@@ -8,14 +9,25 @@ symfony composer req maker --dev - генератор контроллеров
     symfony console make:entity Conference - пример
     symfony console make:entity Comment - пример
 
+    symfony console make:user Admin - создание сущности user
+
+    symfony console make:registration- form - форма регистрации
+
 инструменты:
 symfony composer req logger - логер
 symfony composer req debug --dev - отладка в окражении разработчика
 symfony composer req orm - Doctrine orm
+symfony composer req http-client - слиент http
 
 symfony composer req admin - EasyAdmin админ панель (стр 94)
 symfony composer req twig - много возможностей (экранирование, наследование шаблонов) (101)
+symfony composer req security - защита (155)
 
+symfony composer require browser-kit --dev - фнукциональные тесты (174)
+    symfony console make:functional-test Controller\\ConferenceController - создать бандл
+    symfony run bin/phpunit tests/Controller/ConferenceControllerTest.php - запуск
+
+symfony composer req orm-fixtures --dev - фэйковые данные
 
 symfony composer req annotations - анотации
 

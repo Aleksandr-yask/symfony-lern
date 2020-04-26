@@ -16,7 +16,7 @@ class Comment
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -49,9 +49,14 @@ class Comment
     private $conference;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photoFilename;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default": "submitted"})
+     */
+    private $state = 'submitted';
 
     public function __toString()
     {
@@ -136,9 +141,24 @@ class Comment
         return $this;
     }
 
+    /**
+     * @ORM\PrePersist
+     */
     public function setCreatedAtValue()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function setState(string $state): self
+    {
+        $this->state = $state;
+
+        return $this;
     }
 
 }

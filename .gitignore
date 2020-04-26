@@ -7,7 +7,13 @@
 /public/bundles/
 /var/
 /vendor/
+/public/uploads
 ###< symfony/framework-bundle ###
 
 /.idea
 /.git/
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
