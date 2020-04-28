@@ -22,6 +22,18 @@ symfony composer req http-client - слиент http
 symfony composer req admin - EasyAdmin админ панель (стр 94)
 symfony composer req twig - много возможностей (экранирование, наследование шаблонов) (101)
 symfony composer req security - защита (155)
+symfony composer req messenger - асинхронный код (193)
+	symfony run -d --watch=config,src,templates,vendor symfony console messenger:consume async - получатель сообщений в фонов режиме
+	symfony console messenger:failed:show - показ сообщений отправка которых дала сбой
+	symfony console messenger:failed:retry - повторная попытка отправки сообщения
+symfony composer req mailer - отправка Email (213)
+	symfony composer req twig/cssinliner-extra twig/inky-extra - ljg hfcibhtybz ецшп
+
+
+symfony run pg_dump --data-only > dump.sql - дамп бд
+symfony run psql < dump.sql - загрузка дампа
+
+symfony open:local:rabbitmq - реббит в браузере
 
 symfony composer require browser-kit --dev - фнукциональные тесты (174)
     symfony console make:functional-test Controller\\ConferenceController - создать бандл

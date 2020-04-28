@@ -5,8 +5,8 @@ use App\Entity\Comment;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 class SpamChecker
 {
-    private $client;
-    private $endpoint;
+    private HttpClientInterface $client;
+    private string $endpoint;
     public function __construct(HttpClientInterface $client, string $akismetKey)
     {
         $this->client = $client;
@@ -36,6 +36,8 @@ class SpamChecker
             throw new \RuntimeException(sprintf('Unable to check for spam: %s
 (%s).', $content, $headers['x-akismet-debug-help'][0]));
         }
+
+
         return 'true' === $content ? 1 : 0;
     }
     //akismet-guaranteed-spam@example.com

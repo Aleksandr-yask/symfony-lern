@@ -56,7 +56,7 @@ class Comment
     /**
      * @ORM\Column(type="string", length=255, options={"default": "submitted"})
      */
-    private $state = 'submitted';
+    private string $state = 'submitted';
 
     public function __toString()
     {
