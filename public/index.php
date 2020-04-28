@@ -1,6 +1,7 @@
 <?php
 
 use App\Kernel;
+use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 require dirname(__DIR__).'/config/bootstrap.php';
@@ -20,6 +21,11 @@ if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false
 }
 
 $kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+
+if ($kernel->getEnvironment() === 'dev') {
+    $kernel = new HttpCache($kernel);
+}
+
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 

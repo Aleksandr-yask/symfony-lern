@@ -7,8 +7,7 @@ use App\Entity\Conference;
 use App\Form\CommentFormType;
 use App\Messages\CommentMessage;
 use App\Repository\CommentRepository;
-use App\SpamChecker;
-use Doctrine\ORM\EntityManager;
+use App\Repository\ConferenceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -39,14 +38,37 @@ class ConferenceController extends AbstractController
 
     /**
      * @Route("/", name="homepage")
+     * @param ConferenceRepository $conferenceRepository
      * @return Response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function index()
+    public function index(ConferenceRepository $conferenceRepository)
     {
-        return new Response($this->twig->render('conference/index.html.twig'));
+        $response = new Response($this->twig->render('conference/index.html.twig', [
+            'conferences' => $conferenceRepository->findAll()
+        ]));
+        $response->setSharedMaxAge(3600);
+        return $response;
+    }
+
+    /**
+     * @Route("/conference/header", name="conference_header")
+     * @param ConferenceRepository $conferenceRepository
+     * @return Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function conferenceHeader(ConferenceRepository $conferenceRepository)
+    {
+        $response = new Response($this->twig->render('conference/header.html.twig', [
+            'conferences' => $conferenceRepository->findAll(),
+        ]));
+        $response->setSharedMaxAge(3600);
+
+        return $response;
     }
 
     /**
@@ -112,4 +134,7 @@ class ConferenceController extends AbstractController
             'comment_form' => $form->createView()
         ]));
     }
+
+
+
 }

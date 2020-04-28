@@ -28,7 +28,7 @@ symfony composer req messenger - асинхронный код (193)
 	symfony console messenger:failed:retry - повторная попытка отправки сообщения
 symfony composer req mailer - отправка Email (213)
 	symfony composer req twig/cssinliner-extra twig/inky-extra - ljg hfcibhtybz ецшп
-
+symfony composer req api - API (281)
 
 symfony run pg_dump --data-only > dump.sql - дамп бд
 symfony run psql < dump.sql - загрузка дампа
