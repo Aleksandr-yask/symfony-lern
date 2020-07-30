@@ -44,9 +44,12 @@ symfony composer req orm-fixtures --dev - фэйковые данные
 symfony composer req annotations - анотации
 
 docker
+docker-compose build
 docker-compose up -d - запуск
 docker-compose stop - стоп
 
 symfony console make:migration - миграции
 symfony console doctrine:migrations:migrate
 symfony console make:subscriber TwigEventSubscriber - создание подписчика
+
+export PATH=/usr/local/Cellar/php/7.4.5_2/bin:$PATH
